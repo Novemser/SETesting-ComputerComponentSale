@@ -1,0 +1,96 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+             xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="778.252" Width="532.5">
+    <Grid>
+        <Image x:Name="image" Source="Resources/mo.png" HorizontalAlignment="Left" Height="89" Margin="65,67,0,0" VerticalAlignment="Top" Width="89"/>
+        <Image x:Name="image1" Source="Resources/big.png" HorizontalAlignment="Left" Height="126" Margin="186,103,0,0" VerticalAlignment="Top" Width="125"/>
+        <Image x:Name="image2" Source="Resources/Monitor.png" HorizontalAlignment="Left" Height="107" Margin="373,67,0,0" VerticalAlignment="Top" Width="107"/>
+        <Label x:Name="label" Content="外设" HorizontalAlignment="Left" Margin="65,184,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="主机" HorizontalAlignment="Left" Margin="234,184,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="显示器" HorizontalAlignment="Left" Margin="404,184,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" Text="{Binding OutLet,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="51,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Normal" Text="输入销量"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="textBox1" Text="{Binding MainFrame,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="220,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Normal" Text="输入销量"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="textBox2" Text="{Binding Path=Monitor,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="393,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72">
+            <TextBox.Resources>
+                <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Normal" Text="输入销量"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </TextBox.Resources>
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Background" Value="{StaticResource HintText}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,217,0,0" TextWrapping="Wrap" Text="25$" VerticalAlignment="Top" Width="43"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="244,217,234,0" TextWrapping="Wrap" Text="45$" VerticalAlignment="Top" Width="39"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="420,217,67,0" TextWrapping="Wrap" Text="30$" VerticalAlignment="Top" Width="30"/>
+        <Button Click="Calculate" x:Name="button" Content="计算销售额" HorizontalAlignment="Left" Margin="207,326,0,0" VerticalAlignment="Top" Width="92" Height="23"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="217,390,0,0" TextWrapping="Wrap" Text="总销售额:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="285,390,0,0" TextWrapping="Wrap" Text="{Binding TotalSale}" VerticalAlignment="Top"/>
+        <Button Click="BatchCalculate" x:Name="button1" Content="批量计算" HorizontalAlignment="Left" Margin="217,468,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid HorizontalAlignment="Left" Height="218" Margin="10,519,0,0" VerticalAlignment="Top" Width="497">
+            <wpf:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="0,0,-9,0">
+                <wpf:CartesianChart.AxisX>
+                    <wpf:Axis LabelFormatter="{Binding Formatter}"></wpf:Axis>
+                </wpf:CartesianChart.AxisX>
+            </wpf:CartesianChart>
+        </Grid>
+    </Grid>
+</Window>
