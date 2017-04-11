@@ -7,7 +7,7 @@
              xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="778.252" Width="532.5">
+        Title="MainWindow" Height="596.161" Width="1054.173">
     <Grid>
         <Image x:Name="image" Source="Resources/mo.png" HorizontalAlignment="Left" Height="89" Margin="65,67,0,0" VerticalAlignment="Top" Width="89"/>
         <Image x:Name="image1" Source="Resources/big.png" HorizontalAlignment="Left" Height="126" Margin="186,103,0,0" VerticalAlignment="Top" Width="125"/>
@@ -82,15 +82,24 @@
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="244,217,234,0" TextWrapping="Wrap" Text="45$" VerticalAlignment="Top" Width="39"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="420,217,67,0" TextWrapping="Wrap" Text="30$" VerticalAlignment="Top" Width="30"/>
         <Button Click="Calculate" x:Name="button" Content="计算销售额" HorizontalAlignment="Left" Margin="207,326,0,0" VerticalAlignment="Top" Width="92" Height="23"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="217,390,0,0" TextWrapping="Wrap" Text="总销售额:" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="285,390,0,0" TextWrapping="Wrap" Text="{Binding TotalSale}" VerticalAlignment="Top"/>
-        <Button Click="BatchCalculate" x:Name="button1" Content="批量计算" HorizontalAlignment="Left" Margin="217,468,0,0" VerticalAlignment="Top" Width="75"/>
-        <Grid HorizontalAlignment="Left" Height="218" Margin="10,519,0,0" VerticalAlignment="Top" Width="497">
-            <wpf:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="0,0,-9,0">
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="228,388,0,0" TextWrapping="Wrap" Text="总销售额:" VerticalAlignment="Top" RenderTransformOrigin="0.98,0.7"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="255,412,0,0" TextWrapping="Wrap" Text="{Binding TotalSale}" VerticalAlignment="Top"/>
+        <Button Click="BatchCalculate" x:Name="button1" Content="批量计算" HorizontalAlignment="Left" Margin="716,53,0,0" VerticalAlignment="Top" Width="74"/>
+        <Grid HorizontalAlignment="Left" Margin="513,72,0,0" VerticalAlignment="Top" Width="523" Height="475">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <wpf:CartesianChart Grid.Column="0" Grid.Row="0" Series="{Binding SeriesCollection}" LegendLocation="Bottom" Margin="0,0,-9,0">
                 <wpf:CartesianChart.AxisX>
                     <wpf:Axis LabelFormatter="{Binding Formatter}"></wpf:Axis>
                 </wpf:CartesianChart.AxisX>
             </wpf:CartesianChart>
+            <local:DefactPercentControl Grid.Row="1" x:Name="DefactPercentControl" Grid.Column="0"></local:DefactPercentControl>
+
         </Grid>
     </Grid>
 </Window>

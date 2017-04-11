@@ -18,6 +18,7 @@ namespace WpfApplication1
             Map(m => m.Expected);
             Map(m => m.Result);
             Map(m => m.Exception);
+            Map(m => m.IsCorrect);
         }
         public string Expected { get; set; }
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace WpfApplication1
         public string Result { get; set; }
 
         public string Exception { get; set; }
+
+        public string IsCorrect { get; set; }
     }
 }

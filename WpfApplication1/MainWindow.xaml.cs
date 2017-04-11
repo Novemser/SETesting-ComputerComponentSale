@@ -56,6 +56,7 @@ namespace WpfApplication1
                     Values = _failedValues
                 }
             };
+
             DataContext = this;
         }
         public void SetPassed(double val)
@@ -207,13 +208,15 @@ namespace WpfApplication1
                     foreach (var csvMapper in dataList)
                     {
                         string[] strRes = GetSumStr(csvMapper.OutLet, csvMapper.MainFrame, csvMapper.Monitor);
-                        if (strRes[0].Equals("-1"))
+                        if (strRes[0].Equals(csvMapper.Expected))
                         {
-                            failed++;
+                            csvMapper.IsCorrect = "true";
+                            passed++;
                         }
                         else
                         {
-                            passed++;
+                            csvMapper.IsCorrect = "false";
+                            failed++;
                         }
 
                         csvMapper.Result = strRes[0];
@@ -224,6 +227,7 @@ namespace WpfApplication1
                     SetFailed(failed);
                     SetPassed(passed);
                     SetTotal(failed + passed);
+                    DefactPercentControl.SetValues(passed, failed);
                 }
             }
         }
